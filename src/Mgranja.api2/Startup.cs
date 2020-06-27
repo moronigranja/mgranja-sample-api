@@ -77,8 +77,7 @@ namespace Mgranja.api2
                            Name = "Swagger Codegen Contributors",
                            Url = new Uri("https://github.com/swagger-api/swagger-codegen"),
                            Email = "moronigranja@gmail.com"
-                        },
-                        TermsOfService = new Uri("")
+                        }
                     });
                     c.CustomSchemaIds(type => type.FullName);
                     c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{_hostingEnv.ApplicationName}.xml");
@@ -89,6 +88,8 @@ namespace Mgranja.api2
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
+
+            services.AddScoped<IJurosService, JurosService>();
         }
 
         /// <summary>

@@ -10,9 +10,12 @@
 
 using Mgranja.api2.Attributes;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace Mgranja.api2.Controllers
 {
@@ -21,7 +24,19 @@ namespace Mgranja.api2.Controllers
     /// </summary>
     [ApiController]
     public class CalculaJurosController : ControllerBase
-    { 
+    {
+        private readonly IJurosService _jurosService;
+        private readonly CultureInfo ci = new CultureInfo("pt-br");
+
+        /// <summary>
+        /// Construtor padrao do controlador, deve ser injetado o serviço que provê o valor do Juros
+        /// </summary>
+        /// <param name="jurosService"></param>
+        public CalculaJurosController(IJurosService jurosService)
+        {
+            _jurosService = jurosService;
+        }
+
         /// <summary>
         /// Calcula juros compostos sobre um valor inicial
         /// </summary>
@@ -35,22 +50,20 @@ namespace Mgranja.api2.Controllers
         [ValidateModelState]
         [SwaggerOperation("CalculaJuros")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "valor final calculado")]
-        public virtual ActionResult<string> CalculaJuros([FromQuery][Required()]string valorinicial, [FromQuery][Required()]int? meses)
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
+        public virtual ActionResult<string> CalculaJuros([FromQuery][Required()] string valorinicial, [FromQuery][Required()] int? meses)
+        {
+            if (double.TryParse(valorinicial, NumberStyles.Float | NumberStyles.AllowThousands, ci, out double dblValorInicial))
+            {
+                double jurosAtual = _jurosService.GetJuros();
 
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
+                double valorFinal = dblValorInicial * Math.Pow((double)(1 + jurosAtual), meses.Value);
 
-            string exampleJson = null;
-            exampleJson = "\"\"";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<string>(exampleJson)
-            : default(string);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+                return Ok(valorFinal.ToString("F2",ci));
+            }
+            else
+            {
+                return BadRequest("Valor decimal inválido.");
+            }
         }
     }
 }

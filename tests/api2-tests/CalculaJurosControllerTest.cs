@@ -1,5 +1,9 @@
-﻿using Mgranja.api2.Controllers;
+﻿using Mgranja.api2;
+using Mgranja.api2.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
 namespace api1_tests
@@ -7,10 +11,12 @@ namespace api1_tests
     public class CalculaJurosControllerTest
     {
         private readonly CalculaJurosController _controller;
+        private readonly IJurosService _jurosService;
 
         public CalculaJurosControllerTest()
         {
-            _controller = new CalculaJurosController();
+            _jurosService = new MockJurosService();
+            _controller = new CalculaJurosController(_jurosService);
         }
 
         [Fact]
