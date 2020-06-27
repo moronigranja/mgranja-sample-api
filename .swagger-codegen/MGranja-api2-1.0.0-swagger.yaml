@@ -1,0 +1,61 @@
+swagger: '2.0'
+info:
+  description: Calcula valor final de uma aplicação de Juros por determinado tempo
+  version: 1.0.0
+  title: Calcula Juros API
+  # put the contact info for your development or API team
+  contact:
+    email: moronigranja@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /calculajuros:
+    get:
+      summary: Calcula juros compostos sobre um valor inicial
+      operationId: calculaJuros
+      description: |
+        Calcula o valor final de uma aplicacao financeira apos uma quantidade de meses
+        utilizando juros compostos. A taxa de juros é buscada diretamente de uma API.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: valorinicial
+        description: valor inicial de uma aplicação usando virgula como separador decimal
+        required: true
+        type: string
+      - in: query
+        name: meses
+        description: numero de meses completos de duracao da aplicacao financeira
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+      responses:
+        200:
+          description: valor final calculado
+          schema:
+            type: string
+        400:
+          description: parametro incorreto ou invalido
+  /showmethecode:
+    get:
+      summary: Retorna a URL do código fonte
+      operationId: ShowMeTheCode
+      description: |
+        retorna a URL de onde se pode encontrar o código fonte.
+      produces:
+      - application/json
+      responses:
+        200:
+          description: URL do código fonte
+          schema:
+            type: string
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /MGranja/api2/1.0.0
+schemes:
+ - https
