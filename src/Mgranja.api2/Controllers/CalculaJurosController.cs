@@ -35,38 +35,13 @@ namespace Mgranja.api2.Controllers
         [ValidateModelState]
         [SwaggerOperation("CalculaJuros")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "valor final calculado")]
-        public virtual IActionResult CalculaJuros([FromQuery][Required()]string valorinicial, [FromQuery][Required()]int? meses)
+        public virtual ActionResult<string> CalculaJuros([FromQuery][Required()]string valorinicial, [FromQuery][Required()]int? meses)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(string));
 
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(400);
-
-            string exampleJson = null;
-            exampleJson = "\"\"";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<string>(exampleJson)
-            : default(string);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Retorna a URL do código fonte
-        /// </summary>
-        /// <remarks>retorna a URL de onde se pode encontrar o código fonte. </remarks>
-        /// <response code="200">URL do código fonte</response>
-        [HttpGet]
-        [Route("/MGranja/api2/1.0.0/showmethecode")]
-        [ValidateModelState]
-        [SwaggerOperation("ShowMeTheCode")]
-        [SwaggerResponse(statusCode: 200, type: typeof(string), description: "URL do código fonte")]
-        public virtual IActionResult ShowMeTheCode()
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
 
             string exampleJson = null;
             exampleJson = "\"\"";

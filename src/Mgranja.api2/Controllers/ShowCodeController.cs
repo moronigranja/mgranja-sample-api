@@ -33,7 +33,7 @@ namespace Mgranja.api2.Controllers
         [ValidateModelState]
         [SwaggerOperation("ShowMeTheCode")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "URL do código fonte")]
-        public virtual IActionResult ShowMeTheCode()
+        public virtual ActionResult<string> ShowMeTheCode()
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(string));
