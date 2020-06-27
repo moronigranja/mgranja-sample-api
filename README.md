@@ -41,4 +41,7 @@ build.bat
 cd src/Mgranja.api1
 docker build -t mgranja.api1 .
 docker run -p 5000:5000 mgranja.api1
+cd src/Mgranja.api2
+docker build -t mgranja.api2
+docker run -p 5002:5002 mgranja.api2
 ```
