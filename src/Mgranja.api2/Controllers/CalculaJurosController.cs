@@ -20,7 +20,7 @@ namespace Mgranja.api2.Controllers
     /// 
     /// </summary>
     [ApiController]
-    public class DefaultApiController : ControllerBase
+    public class CalculaJurosController : ControllerBase
     { 
         /// <summary>
         /// Calcula juros compostos sobre um valor inicial
