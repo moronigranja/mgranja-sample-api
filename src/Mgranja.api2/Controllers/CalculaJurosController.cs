@@ -52,13 +52,17 @@ namespace Mgranja.api2.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "valor final calculado")]
         public virtual ActionResult<string> CalculaJuros([FromQuery][Required()] string valorinicial, [FromQuery][Required()] int? meses)
         {
-            if (double.TryParse(valorinicial, NumberStyles.Float | NumberStyles.AllowThousands, ci, out double dblValorInicial))
+            if (double.TryParse(valorinicial, NumberStyles.Float | NumberStyles.AllowThousands, ci, out double dblValorInicial) && meses > 0)
             {
                 double jurosAtual = _jurosService.GetJuros();
 
                 double valorFinal = dblValorInicial * Math.Pow((double)(1 + jurosAtual), meses.Value);
 
                 return Ok(valorFinal.ToString("F2",ci));
+            }
+            else if(meses <= 0)
+            {
+                return BadRequest("Quantidade de meses invalida. Deve ser um valor positivo.");
             }
             else
             {
