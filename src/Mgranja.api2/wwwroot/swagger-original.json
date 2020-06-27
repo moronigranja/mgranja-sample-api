@@ -1,0 +1,72 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Calcula valor final de uma aplicação de Juros por determinado tempo",
+    "version" : "1.0.0",
+    "title" : "Calcula Juros API",
+    "contact" : {
+      "email" : "moronigranja@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/MGranja/api2/1.0.0",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/calculajuros" : {
+      "get" : {
+        "summary" : "Calcula juros compostos sobre um valor inicial",
+        "description" : "Calcula o valor final de uma aplicacao financeira apos uma quantidade de meses\nutilizando juros compostos. A taxa de juros é buscada diretamente de uma API.\n",
+        "operationId" : "calculaJuros",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "valorinicial",
+          "in" : "query",
+          "description" : "valor inicial de uma aplicação usando virgula como separador decimal",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "meses",
+          "in" : "query",
+          "description" : "numero de meses completos de duracao da aplicacao financeira",
+          "required" : true,
+          "type" : "integer",
+          "minimum" : 1,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "valor final calculado",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "400" : {
+            "description" : "parametro incorreto ou invalido"
+          }
+        }
+      }
+    },
+    "/showmethecode" : {
+      "get" : {
+        "summary" : "Retorna a URL do código fonte",
+        "description" : "retorna a URL de onde se pode encontrar o código fonte.\n",
+        "operationId" : "ShowMeTheCode",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "URL do código fonte",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}

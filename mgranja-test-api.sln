@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mgranja.api1", "src\Mgranja.api1\Mgranja.api1.csproj", "{2455C68D-47B1-42B5-B4AB-41FC1AE5098F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mgranja.api2", "src\Mgranja.api2\Mgranja.api2.csproj", "{CB410B93-CDB5-4BD9-869C-8A1558E3A32B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2455C68D-47B1-42B5-B4AB-41FC1AE5098F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2455C68D-47B1-42B5-B4AB-41FC1AE5098F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2455C68D-47B1-42B5-B4AB-41FC1AE5098F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB410B93-CDB5-4BD9-869C-8A1558E3A32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB410B93-CDB5-4BD9-869C-8A1558E3A32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB410B93-CDB5-4BD9-869C-8A1558E3A32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB410B93-CDB5-4BD9-869C-8A1558E3A32B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
