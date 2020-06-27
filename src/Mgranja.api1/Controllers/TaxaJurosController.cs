@@ -12,6 +12,7 @@ using Mgranja.api1.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Globalization;
 
 namespace Mgranja.api1.Controllers
 {
@@ -20,11 +21,15 @@ namespace Mgranja.api1.Controllers
     /// </summary>
     [ApiController]
     public class TaxaJurosController : ControllerBase
-    { 
+    {
+
+        private readonly CultureInfo ci = new CultureInfo("pt-br");
+        private readonly double taxaDeJuros = 0.01;
+
         /// <summary>
         /// retorna a taxa de Juros/mês
         /// </summary>
-        
+
         /// <response code="200">Retorna a taxa de juros mensal fixa da aplicação  em formato decimal separado por vírgula </response>
         [HttpGet]
         [Route("/MGranja/api1/1.0.0/taxaJuros")]
@@ -32,18 +37,8 @@ namespace Mgranja.api1.Controllers
         [SwaggerOperation("TaxaJurosGet")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Retorna a taxa de juros mensal fixa da aplicação  em formato decimal separado por vírgula ")]
         public virtual ActionResult<string> TaxaJurosGet()
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
-
-            string exampleJson = null;
-            exampleJson = "\"0,01\"";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<string>(exampleJson)
-            : default(string);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        {
+            return Ok(taxaDeJuros.ToString("F2", ci));
         }
     }
 }
