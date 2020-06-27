@@ -10,9 +10,8 @@
 
 using Mgranja.api2.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel.DataAnnotations;
 
 namespace Mgranja.api2.Controllers
 {
@@ -21,7 +20,17 @@ namespace Mgranja.api2.Controllers
     /// </summary>
     [ApiController]
     public class ShowCodeController : ControllerBase
-    {        
+    {
+        private readonly IConfiguration _configuration;
+
+        /// <summary>
+        /// Construtor padrao do controlador, deve ser injetado o serviço que provê o valor do Juros
+        /// </summary>
+        /// <param name="configuration"></param>
+        public ShowCodeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         /// <summary>
         /// Retorna a URL do código fonte
@@ -34,18 +43,9 @@ namespace Mgranja.api2.Controllers
         [SwaggerOperation("ShowMeTheCode")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "URL do código fonte")]
         public virtual ActionResult<string> ShowMeTheCode()
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
-
-            string exampleJson = null;
-            exampleJson = "\"\"";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<string>(exampleJson)
-            : default(string);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        {
+            string SourceURL = _configuration.GetSection("ApplicationSource:URL").Value;
+            return Ok(SourceURL);
         }
     }
 }
